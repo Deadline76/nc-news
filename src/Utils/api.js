@@ -29,3 +29,9 @@ export const getArticleById = (article_id) => {
         return response.data.msg
     })
 }
+
+export const getCommentsByArticle = (article_id) => {
+    return axios.get(`${baseURL}/articles/${article_id}/comments`).then((response) => {
+        return response.data.msg
+    })
+}

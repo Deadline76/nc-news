@@ -3,8 +3,10 @@
   text-align: center;
   display: block;
   background-color: rgb(141, 248, 212);
-  padding: 1em;
+  padding: .5em;
   font-size: 3rem;
+  color: black;
+  text-decoration: none;
 }
 
 .nav {
