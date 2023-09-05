@@ -9,22 +9,27 @@ export const ListTopics = () => {
     useEffect(() => {
         getTopics().then((topics) => {
             setAllTopics(topics)
+            
         })
     }, [])
 
     return (
-        <div>
-            <h1>Article Topics</h1>
-            <ul>
-                {allTopics.map((topic) => {
-                    <li key={topic}>
-                        <Link to={`/topic/${topic}`}>{topic}</Link>
-                    </li>
-                })}
-                    <li>
-                        <Link to={`/topic`}>All Topics</Link>
-                    </li>
-            </ul>
+        <div className="category-container">
+            <h1 className="category-title">Article Topics</h1>
+            <div className="category-grid">
+                <div className="category-list">
+                    <Link to="/topic" className="category-item">all topics</Link>
+                    {allTopics.map((topic) => (
+                        <Link
+                            key={topic}
+                            to={`/topic/${topic}`}
+                            className="category-item"
+                        >
+                            {topic}
+                        </Link>
+                    ))}
+                </div>
+            </div>
         </div>
-    )
-}
+    );
+};

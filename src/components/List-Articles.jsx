@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { getArticlesByTopic } from "../Utils/api"
+import { getAllArticles, getArticlesByTopic } from "../Utils/api"
+import { useParams } from "react-router-dom"
 
 
 export const ListArticles = (props) => {
@@ -7,22 +8,30 @@ export const ListArticles = (props) => {
     
 
     useEffect(() => {
+        if (!props.topic) {
+            getAllArticles().then((data) => {
+                setArticles(data)
+            })
+        } else {
         getArticlesByTopic(props.topic).then((data) => {
             setArticles(data)
         })
+    }
     }, [props.topic])
 
+
     return (
-        <>
-        {data.map((({title, topic, votes, article_id}) => {
+        <div>
+        {articles.map((({title, topic, votes, article_id}) => {
+            
             return (
-              <section key={article_id}>
-              <h1>{title}</h1>
-              <p>{topic}</p>
-              <p>{votes}</p>  
-              </section>
+                <section key={article_id} className="article-section">
+                    <h2 className="article-title">{title}</h2>
+                    <p className="article-topic">{topic}</p>
+                    <p className="article-votes">Votes: {votes}</p>
+                </section>
             )
         }))}
-        </>
+        </div>
     )
 }

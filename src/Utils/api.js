@@ -3,7 +3,7 @@ import axios from 'axios'
 const baseURL = 'https://nc-news-u3qb.onrender.com/api'
 
 export const getArticlesByTopic = (selectedTopic) => {
-    return axios.get(`${baseURL}/articles?topic=${selectedTopic}`).then((response) => {
+    return axios.get(`${baseURL}/articles?filter_by=${selectedTopic}`).then((response) => {
         return response.data.articles
     })
 }
@@ -15,5 +15,11 @@ export const getTopics = () => {
             allTopics.push(topic.slug)
         })
         return allTopics
+    })
+}
+
+export const getAllArticles = () => {
+    return axios.get(`${baseURL}/articles`).then((response) => {
+        return response.data.articles
     })
 }

@@ -11,7 +11,8 @@ function App() {
     <>
      <Routes>
        <Route path='/' element={<Topics />}></Route>
-       <Route path='/topic/:topic' element={<ArticlesByTopic />}></Route>
+       <Route path='/topic/:topicName' element={<ArticlesByTopic />}></Route>
+       <Route path='/topic' element={<ArticlesByTopic />}></Route>
      </Routes>
     </>
   )
