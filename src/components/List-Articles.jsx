@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getAllArticles, getArticlesByTopic } from "../Utils/api"
-import { useParams } from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 
 export const ListArticles = (props) => {
@@ -31,11 +31,13 @@ export const ListArticles = (props) => {
         {articles.map((({title, topic, votes, article_id}) => {
             
             return (
-                <section key={article_id} className="article-section">
-                    <h2 className="article-title">{title}</h2>
-                    <h4 className="article-topic">{topic}</h4>
-                    <span className="article-votes">Votes: {votes}</span>
-                </section>
+                <Link key={article_id} to={`/article/${article_id}`}> 
+                    <section key={article_id} className="article-section">
+                        <h2 className="article-title">{title}</h2>
+                        <h4 className="article-topic">{topic}</h4>
+                        <span className="article-votes">Votes: {votes}</span>
+                    </section>
+                </Link>
             )
         }))}
         </div>
