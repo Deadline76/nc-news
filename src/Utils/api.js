@@ -23,3 +23,9 @@ export const getAllArticles = () => {
         return response.data.articles
     })
 }
+
+export const getArticleById = (article_id) => {
+    return axios.get(`${baseURL}/articles/${article_id}`).then((response) => {
+        return response.data.msg
+    })
+}
