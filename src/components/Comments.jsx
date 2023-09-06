@@ -10,7 +10,6 @@ export const Comments = ({selectedArticle}) => {
     useEffect(() => {
         getCommentsByArticle(selectedArticle).then((data) => {
             setComments(data)
-            console.log(data)
             setIsLoading(false)
         })
     },[])

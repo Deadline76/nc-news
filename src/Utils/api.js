@@ -35,3 +35,11 @@ export const getCommentsByArticle = (article_id) => {
         return response.data.msg
     })
 }
+
+export const updateArticleVotes = (article_id, obj) => {
+    return axios.patch(`${baseURL}/articles/${article_id}`, obj)
+    .then(response => {
+        console.log(response)
+        return response.data
+    })
+}
