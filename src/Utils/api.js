@@ -39,7 +39,13 @@ export const getCommentsByArticle = (article_id) => {
 export const updateArticleVotes = (article_id, obj) => {
     return axios.patch(`${baseURL}/articles/${article_id}`, obj)
     .then(response => {
-        console.log(response)
+        return response.data
+    })
+}
+
+export const postCommentByArticle = (article_id, obj) => {
+    return axios.post(`${baseURL}/articles/${article_id}/comments`, obj)
+    .then(response => {
         return response.data
     })
 }
