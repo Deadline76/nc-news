@@ -18,15 +18,15 @@ export const Comments = ({selectedArticle}) => {
     if (isloading) return <h2 className="loading">Loading...</h2>
 
     return (
-        <div>
+        <div className="comments-div">
             {comments.map((({comment_id, author, body, votes, created_at}) => {
                 return (
-                    <section key={comment_id}>
-                        <h3>{author}</h3>
-                        <p>{body}</p>
-                        <footer>
-                            <span>Likes: {votes}</span>
-                            <span>Commented on: {created_at.slice(0, 10)}</span>
+                    <section className="comments-section" key={comment_id}>
+                        <h3 className="comments-h3">{author}</h3>
+                        <p className="comments-body">{body}</p>
+                        <footer className="comments-footer">
+                            <span className="comments-span">Likes: {votes}</span>
+                            <span className="comments-span">Commented on: {created_at.slice(0, 10)}</span>
                         </footer>
                     </section>
                 )

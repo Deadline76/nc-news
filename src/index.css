@@ -3,7 +3,7 @@
   text-align: center;
   display: block;
   background-color: rgb(141, 248, 212);
-  padding: .5em;
+  padding: .3em;
   font-size: 3rem;
   color: black;
   text-decoration: none;
@@ -126,4 +126,45 @@
   max-height: 400px;
   width: auto;
   height: auto;
+}
+
+.comments-div {
+  font-family: 'Arial', sans-serif;
+  background-color: #f6f6f6;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.comments-section {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.comments-h3 {
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.comments-p {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.comments-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.comments-span {
+  margin-right: 10px;
 }
