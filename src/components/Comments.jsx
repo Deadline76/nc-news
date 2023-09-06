@@ -12,7 +12,14 @@ export const Comments = ({selectedArticle}) => {
             setComments(data)
             setIsLoading(false)
         })
-    },[])
+    },[selectedArticle])
+
+    if (comments.length === 0) return (
+        <div> 
+            <h5 className="no-comments">be the first to comment...</h5>
+        </div>
+        )
+
 
     if (isloading) return <h2 className="loading">Loading...</h2>
 

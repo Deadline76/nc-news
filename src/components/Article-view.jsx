@@ -8,6 +8,7 @@ export const ArticleView = ({selectedArticle}) => {
     const [isloading, setIsLoading] = useState(true)
     const [likes, setLikes] = useState(0)
     const [hasLiked, setHasLiked] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         getArticleById(selectedArticle).then((data) => {
@@ -19,24 +20,26 @@ export const ArticleView = ({selectedArticle}) => {
 
     
     const handleLikeClick = () => {
-        if(!hasLiked)
+        if(!hasLiked) {
         setLikes(likes + 1)
         setHasLiked(true)
         updateArticleVotes(selectedArticle, {inc_votes: 1}).then(data => {
             
         })
+    
         .catch(err => {
             if(err) {
                 setLikes(likes)
                 setHasLiked(false)
-                alert('Error: something went wrong, please try again later')
+                setError(true)
             }
         })
     }
+}
 
 
     const handleUnlikeClick = () => {
-        if(hasLiked)
+        if(hasLiked) {
         setLikes(likes - 1)
         setHasLiked(false)
         updateArticleVotes(selectedArticle, {inc_votes: -1}).then(data => {
@@ -46,12 +49,13 @@ export const ArticleView = ({selectedArticle}) => {
             if(err) {
                 setLikes(likes)
                 setHasLiked(true)
-                alert('Error: something went wrong, please try again later')
+                setError(true)
             }
         })
     }
+}
 
-   
+   if (error) return <h2>Error: something went wrong, please try again later</h2>
 
     if (isloading) return <h2 className="loading">Loading...</h2>
 
