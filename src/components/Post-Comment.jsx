@@ -20,7 +20,7 @@ export const PostComment = ({selectedArticle}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (sendComment.length < 5 || sendComment.length > 350) {
+        if (sendComment.length < 4 || sendComment.length > 350) {
             setIsValidated(false)
         } else {
         
@@ -38,11 +38,12 @@ export const PostComment = ({selectedArticle}) => {
         .catch(err => {
             setError('Sorry we could not post your comment at this time.')
             setIsLoading(false)
+            
         })
     }
 }
 
-    if (isLoading) return <h2 className="loading">Loading...</h2>
+    if (isLoading) return <h2 className="loading">posting...</h2>
 
     if (error) return <h2 className="loading">{error}</h2>
 

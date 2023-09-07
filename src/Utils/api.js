@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const baseURL = 'https://nc-news-u3qb.onrender.com/api'
 
-export const getArticlesByTopic = (selectedTopic) => {
-    return axios.get(`${baseURL}/articles?filter_by=${selectedTopic}`).then((response) => {
+export const getArticles = (selectedTopic, orderBy, sortBy) => {
+    return axios.get(`${baseURL}/articles?filter_by=${selectedTopic}&sort_by=${sortBy}&order_by=${orderBy}`).then((response) => {
         return response.data.articles
     })
 }
@@ -15,12 +15,6 @@ export const getTopics = () => {
             allTopics.push(topic.slug)
         })
         return allTopics
-    })
-}
-
-export const getAllArticles = () => {
-    return axios.get(`${baseURL}/articles`).then((response) => {
-        return response.data.articles
     })
 }
 
@@ -47,5 +41,11 @@ export const postCommentByArticle = (article_id, obj) => {
     return axios.post(`${baseURL}/articles/${article_id}/comments`, obj)
     .then(response => {
         return response.data
+    })
+}
+
+export const getArticlesBySort = () => {
+    return axios.get(`${baseURL}/articles`).then((response) => {
+        return response.data.articles
     })
 }
