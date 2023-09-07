@@ -7,9 +7,9 @@ import { SortByOrderBy } from '../components/Sort-By-Order-by'
 
 export const ArticlesByTopic = () => {
     const { topicName } = useParams()
-    const [topic, setTopic] = useState([topicName])
-    const [sortBy, setSortBy] = useState('created_at')
-    const [orderBy, setOrderBy] = useState('desc')
+    const [topic, setTopic] = useState(topicName)
+    const [sortBy, setSortBy] = useState('')
+    const [orderBy, setOrderBy] = useState('')
 
 
     return (

@@ -3,9 +3,16 @@ import axios from 'axios'
 const baseURL = 'https://nc-news-u3qb.onrender.com/api'
 
 export const getArticles = (selectedTopic, orderBy, sortBy) => {
-    return axios.get(`${baseURL}/articles?filter_by=${selectedTopic}&sort_by=${sortBy}&order_by=${orderBy}`).then((response) => {
-        return response.data.articles
+    return axios.get(`${baseURL}/articles`, {
+        params: {
+        filter_by: selectedTopic,
+        sort_by: sortBy,
+        order_by: orderBy
+        }
     })
+    .then((response) => {
+        return response.data.articles
+})
 }
 
 export const getTopics = () => {

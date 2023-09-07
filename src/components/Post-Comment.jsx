@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { postCommentByArticle } from "../Utils/api"
+import { UserContext } from "../Contexts/User-context"
+import { useContext } from "react"
 
 
 export const PostComment = ({selectedArticle}) => {
-    const [user, setUser] = useState('cooljmessy')
+    const { user } = useContext(UserContext);
     const [sendComment, setSendComment] = useState('')
     const [postedComment, setPostedComment] = useState(null)
     const [postedAt, setPostedAt] = useState('')

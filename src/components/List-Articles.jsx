@@ -12,7 +12,6 @@ export const ListArticles = ({topic, orderBy, sortBy}) => {
     useEffect(() => {
         setIsLoading(true)
             getArticles(topic, orderBy, sortBy).then((data) => {
-                console.log(sortBy)
                 setArticles(data)
                 setIsLoading(false)
         })
