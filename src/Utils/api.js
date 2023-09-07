@@ -51,8 +51,9 @@ export const postCommentByArticle = (article_id, obj) => {
     })
 }
 
-export const getArticlesBySort = () => {
-    return axios.get(`${baseURL}/articles`).then((response) => {
-        return response.data.articles
+export const deleteComment = (comment_id) => {
+    return axios.delete(`${baseURL}/comments/${comment_id}`)
+    .then(response => {
+        return response.data
     })
 }

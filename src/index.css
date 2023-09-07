@@ -66,8 +66,6 @@
 .article-title {
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
-  
-  
 }
 
 .article-topic {
@@ -101,7 +99,9 @@
   background-color: #f5f5f5;
   padding: 20px;
   border: 1px solid #ddd;
+  border-radius: 5px;
   margin-bottom: 20px;
+  margin-top: 20px;
   font-family: 'Arial', sans-serif;
 }
 
@@ -156,6 +156,19 @@
   padding: 15px 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .comments-h3 {
@@ -258,3 +271,4 @@
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+

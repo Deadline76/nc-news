@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react"
-import { getCommentsByArticle } from "../Utils/api"
+import { deleteComment, getCommentsByArticle } from "../Utils/api"
+import { UserContext } from "../Contexts/User-context"
+import { useContext } from "react"
 
 
 export const Comments = ({selectedArticle}) => {
     const [comments, setComments] = useState([])
     const [isloading, setIsLoading] = useState(true)
+    const { user } = useContext(UserContext);
+    const [error, setError] = useState('')
+    const [deleting, setDeleting] = useState(false)
 
 
     useEffect(() => {
@@ -13,6 +18,19 @@ export const Comments = ({selectedArticle}) => {
             setIsLoading(false)
         })
     },[selectedArticle])
+
+    const handleDeleteClick = (comment_id) => {
+        setDeleting(true)
+        deleteComment(comment_id).then(() => {
+            setComments(originalComments => originalComments.filter(comment => 
+                comment.comment_id !== comment_id))
+            setDeleting(false)
+        })
+        .catch(err => {
+            setDeleting(false)
+            setError('Error: Could not delete your comment at this time')
+        })
+    }
 
     if (comments.length === 0) return (
         <div> 
@@ -25,9 +43,14 @@ export const Comments = ({selectedArticle}) => {
 
     return (
         <div className="comments-div">
-            {comments.map((({comment_id, author, body, votes, created_at}) => {
+
+            {deleting ? <h2 className="loading">Deleting...</h2>: null}
+            {error ? <h2 className="loading">`${error}`</h2>: null}
+
+            {comments.map(({ comment_id, author, body, votes, created_at }) => {
                 return (
                     <section className="comments-section" key={comment_id}>
+                        {user === author ? <button className="delete-button" onClick={() => handleDeleteClick(comment_id)}>Delete</button>: null}
                         <h3 className="comments-h3">{author}</h3>
                         <p className="comments-body">{body}</p>
                         <footer className="comments-footer">
@@ -36,7 +59,7 @@ export const Comments = ({selectedArticle}) => {
                         </footer>
                     </section>
                 )
-            }))}
+            })}
         </div>
     )
 }
