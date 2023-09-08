@@ -4,7 +4,7 @@ import { UserContext } from "../Contexts/User-context"
 import { useContext } from "react"
 
 
-export const PostComment = ({selectedArticle}) => {
+export const PostComment = ({selectedArticle, setComments}) => {
     const { user } = useContext(UserContext);
     const [sendComment, setSendComment] = useState('')
     const [postedComment, setPostedComment] = useState(null)
@@ -18,29 +18,41 @@ export const PostComment = ({selectedArticle}) => {
         setSendComment(event.target.value)
     }
 
-   
-
     const handleSubmit = (event) => {
         event.preventDefault()
+        
         if (sendComment.length < 4 || sendComment.length > 350) {
             setIsValidated(false)
         } else {
-        
+
+        setPostedComment(sendComment)
+
         const commentObj = {
             username: user,
             body: sendComment
         }
+
+        const optimisticComment = {
+            comment_id: new Date(),
+            author: user,
+            body: sendComment,
+            votes: 0,
+            created_at: 'now'
+        }
+
+        setComments(currentComments => [optimisticComment, ...currentComments])
+
         setIsLoading(true)
         postCommentByArticle(selectedArticle, commentObj).then((data) => {
             setSendComment('')
-            setPostedComment(data.comment.body)
-            setPostedAt(data.comment.created_at)
             setIsLoading(false)
         })
         .catch(err => {
             setError('Sorry we could not post your comment at this time.')
             setIsLoading(false)
-            
+            setComments(currentComments => 
+                currentComments.filter(comment => comment.comment_id !== optimisticComment.comment_id))
+            setPostedComment('')
         })
     }
 }
@@ -50,20 +62,6 @@ export const PostComment = ({selectedArticle}) => {
     if (error) return <h2 className="loading">{error}</h2>
 
     if (!isValidated) return <h2 className="loading">Your comment must be between 5 and 350 characters</h2>
-
-
-    if (postedComment) return (
-        <div className="post-comments-div">
-            <section className="comments-section">
-                <h3 className="comments-h3">{`Thanks for posting ${user}!`}</h3>
-                <p className="comments-body">{postedComment}</p>
-                <footer className="comments-footer">
-                    <span className="comments-span">Likes: 0</span>
-                    <span className="comments-span">{`Commented on: ${postedAt.slice(0,10)}`}</span>
-                </footer>
-            </section>
-        </div>
-    )
 
     return (
         <form className="form" onSubmit={handleSubmit}>

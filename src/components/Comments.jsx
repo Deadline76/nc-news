@@ -4,8 +4,7 @@ import { UserContext } from "../Contexts/User-context"
 import { useContext } from "react"
 
 
-export const Comments = ({selectedArticle}) => {
-    const [comments, setComments] = useState([])
+export const Comments = ({selectedArticle, comments, setComments}) => {
     const [isloading, setIsLoading] = useState(true)
     const { user } = useContext(UserContext);
     const [error, setError] = useState('')
@@ -55,7 +54,7 @@ export const Comments = ({selectedArticle}) => {
                         <p className="comments-body">{body}</p>
                         <footer className="comments-footer">
                             <span className="comments-span">Likes: {votes}</span>
-                            <span className="comments-span">Commented on: {created_at.slice(0, 10)}</span>
+                            <span className="comments-span">Date: {created_at.slice(0, 10)}</span>
                         </footer>
                     </section>
                 )
