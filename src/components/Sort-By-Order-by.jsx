@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 
 
 export const SortByOrderBy = ({setSortBy, setOrderBy}) => {
@@ -20,8 +19,8 @@ export const SortByOrderBy = ({setSortBy, setOrderBy}) => {
                 <option value='votes'>Likes</option>
             </select>
             <select onChange={handleOrderBy} className="dropdown">
-                <option value='asc'>Ascending</option>
                 <option value='desc'>Descending</option>
+                <option value='asc'>Ascending</option>
             </select>
         </div>
     )
