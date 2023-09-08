@@ -9,12 +9,17 @@ export const ArticleView = ({selectedArticle}) => {
     const [likes, setLikes] = useState(0)
     const [hasLiked, setHasLiked] = useState(false)
     const [error, setError] = useState(false)
+    const [articleError, setArticleError] = useState('')
 
     useEffect(() => {
         getArticleById(selectedArticle).then((data) => {
             setDisplayArticle(data)
             setLikes(data.votes)
             setIsLoading(false)
+        })
+        .catch(err => {
+            if(err.code === 'ERR_BAD_REQUEST')
+            setArticleError('Sorry Article Not Found')
         })
     }, [selectedArticle])
 
@@ -54,6 +59,8 @@ export const ArticleView = ({selectedArticle}) => {
         })
     }
 }
+
+   if (articleError) return <h2 className="loading">{articleError}</h2>
 
    if (error) return <h2>Error: something went wrong, please try again later</h2>
 
